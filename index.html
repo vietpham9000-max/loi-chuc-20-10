@@ -56,7 +56,7 @@
         h1 { font-size: 1.5em; color: #d9534f; margin-top: 0; }
         p { font-size: 1em; color: #333; }
 
-        /* --- CSS CHO HIỆU ỨNG MỚI (Full) --- */
+        /* --- CSS CHO HIỆU ỨNG MỚI --- */
         .post-open-effects {
             position: absolute;
             top: 0; left: 0;
@@ -66,8 +66,6 @@
             transition: opacity 1s ease-in, visibility 1s;
             z-index: 1;
             overflow: hidden; 
-            
-            /* === THÊM SAO LẤP LÁNH === */
             background-image: radial-gradient(white 0.5px, transparent 0.5px);
             background-size: 150px 150px;
         }
@@ -76,19 +74,7 @@
             opacity: 1; visibility: visible; z-index: 6; 
         }
 
-        /* === THÊM CHỮ "MÓN QUÀ..." === */
-        .top-text {
-            position: absolute;
-            top: 5%;
-            left: 5%;
-            color: white;
-            font-size: 1.2em;
-            font-family: 'Arial', sans-serif;
-            text-shadow: 0 0 5px #ff007f;
-            opacity: 0;
-            animation: fadeInText 2s ease-out 2s forwards; /* Hiện sau cùng */
-            z-index: 100;
-        }
+        /* === ĐÃ XÓA CSS CHO .top-text === */
 
         /* 1. Hiệu ứng tim "NHỘN NHỊP" */
         .particle-heart {
@@ -96,7 +82,7 @@
             top: 35%; 
             left: 50%; 
             width: 300px; height: 300px;
-            transform: translate(-50%, -50%) scale(1.3); /* Phóng to hơn */
+            transform: translate(-50%, -50%) scale(1.3);
             animation: fadeInHeart 2s ease-out 0.5s forwards;
             opacity: 0;
         }
@@ -111,7 +97,6 @@
             background: #ff007f; 
             border-radius: 50%;
             opacity: 0;
-            /* Thêm hiệu ứng "mềm" (blur) và "rực rỡ" (shadow) */
             box-shadow: 0 0 8px #ff007f, 0 0 15px #ff007f;
             filter: blur(1px);
             animation: particleAnimation 3s infinite ease-out;
@@ -126,12 +111,11 @@
         /* 2. Hiệu ứng chữ "BÊN DƯỚI" (Đã sửa lỗi) */
         .vortex-container {
             position: absolute;
-            bottom: 2%; /* Đẩy xuống thấp hơn */
+            bottom: 2%; 
             left: 50%; 
             transform: translateX(-50%); 
             width: 100%;
             height: 500px; 
-            /* Thay đổi góc nhìn cho giống video */
             perspective: 800px; 
             transform-style: preserve-3d;
             opacity: 0;
@@ -146,7 +130,6 @@
         .text-ring-vortex {
             position: absolute;
             transform-style: preserve-3d;
-            /* Nghiêng nhiều hơn để "dẹt" xuống */
             transform: rotateX(80deg); 
             animation: spin 30s linear infinite;
         }
@@ -167,20 +150,18 @@
             text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f;
             transform-origin: 50% 50%;
             backface-visibility: hidden;
-            /* JS sẽ thêm transform ở đây */
         }
         
-        /* === CSS cho các vòng chữ bên trong === */
-        #ring1 .letter-span { /* Vòng ngoài (lời chúc chính) */
+        #ring1 .letter-span {
             font-size: 1.5em; 
             text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f;
         }
-        #ring2 .letter-span { /* Vòng giữa */
+        #ring2 .letter-span {
             font-size: 1.2em;
             opacity: 0.9;
             text-shadow: 0 0 5px #fff, 0 0 10px #00ffff;
         }
-        #ring3 .letter-span { /* Vòng trong */
+        #ring3 .letter-span {
             font-size: 1.0em;
             opacity: 0.8;
             text-shadow: 0 0 5px #fff, 0 0 10px #ffff00;
@@ -217,7 +198,7 @@
     </div>
 
     <div class="post-open-effects">
-        <div class="top-text">Món quà 20/10 dành cho vợ anh 💖</div>
+        
         <div class="particle-heart"></div>
         <div class="vortex-container">
             <div class="text-ring-vortex" id="ring1"></div>
@@ -243,7 +224,7 @@
 
         // --- JavaScript cho Tim "NHỘN NHỊP" ---
         function createHeartParticles() {
-            const numParticles = 2500; // Tăng lên 2500 hạt
+            const numParticles = 2500; 
             for (let i = 0; i < numParticles; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -266,15 +247,13 @@
             const ring2 = document.getElementById('ring2');
             const ring3 = document.getElementById('ring3');
             
-            /* === NỘI DUNG CHỮ MỚI GIỐNG VIDEO === */
             const text1 = "Chúc mừng Bé Thùy ngày 20/10 ❤️ ";
-            const text2 = "💖 Yêu em ✨ Hạnh phúc 💖 520 ";
+            const text2 = "💖 Yêu em ✨ Hạnh phúc 💖  ";
             const text3 = "🎉 20/10 ✨ Vui vẻ 💖 ";
 
-            // Thay đổi bán kính cho giống video
-            generateRing(ring1, text1.repeat(2), 450); // Vòng ngoài, 450px
-            generateRing(ring2, text2.repeat(4), 300); // Vòng giữa, 300px
-            generateRing(ring3, text3.repeat(5), 150); // Vòng trong, 150px
+            generateRing(ring1, text1.repeat(2), 450); 
+            generateRing(ring2, text2.repeat(4), 300); 
+            generateRing(ring3, text3.repeat(5), 150); 
         }
 
         function generateRing(container, text, radius) {
@@ -284,8 +263,6 @@
                 const span = document.createElement('span');
                 span.className = 'letter-span';
                 span.innerText = letter;
-                /* === SỬA LỖI ĐỊNH VỊ CHỮ CÁI === */
-                // Vừa xoay + đẩy ra, vừa căn giữa chữ cái
                 span.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px) translateX(-50%) translateY(-50%)`;
                 container.appendChild(span);
             });
