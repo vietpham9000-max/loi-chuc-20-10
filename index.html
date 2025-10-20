@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 20/10</title>
+    <style>
+        /* CSS cho trang web */
+        body {
+            /* Bạn có thể thay đổi màu nền ở đây */
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Ẩn thanh cuộn */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Nền mờ cho dễ đọc */
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            /* Bạn có thể thay đổi lời chúc chính ở đây */
+            font-size: 2.5em;
+            color: #d9534f;
+            animation: pulse 2s infinite;
+        }
+
+        p {
+            /* Bạn có thể thay đổi lời chúc phụ ở đây */
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* Hiệu ứng tim rơi */
+        .heart {
+            position: absolute;
+            top: -50px; /* Bắt đầu từ bên trên màn hình */
+            font-size: 24px;
+            animation: fall 5s linear infinite;
+        }
+
+        /* Animation cho tim rơi */
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg); /* Rơi xuống 100% chiều cao màn hình */
+                opacity: 0;
+            }
+        }
+
+        /* Animation cho chữ "Chúc Mừng 20/10" */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Chúc Mừng 20/10!</h1>
+        <p>Chúc cho những người phụ nữ tuyệt vời luôn xinh đẹp, hạnh phúc và thành công!</p>
+    </div>
+
+    <script>
+        // JavaScript để tạo hiệu ứng tim rơi
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Bạn có thể dùng '❤️', '🌸', '✨' hoặc bất kỳ emoji nào
+            heart.innerText = '❤️'; 
+            
+            // Vị trí xuất hiện ngẫu nhiên theo chiều ngang
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Thời gian rơi ngẫu nhiên
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Rơi từ 4-7 giây
+            
+            // Kích thước ngẫu nhiên
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px'; // Kích thước từ 15-25px
+
+            document.body.appendChild(heart);
+
+            // Xóa trái tim sau khi nó rơi xong để tránh làm chậm trang
+            setTimeout(() => {
+                heart.remove();
+            }, 7000); // 7 giây (phải lớn hơn thời gian rơi)
+        }
+
+        // Tạo tim mới mỗi 300ms
+        setInterval(createHeart, 300);
+    </script>
+
+</body>
+</html>
