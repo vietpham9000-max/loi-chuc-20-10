@@ -65,7 +65,9 @@
             opacity: 0; visibility: hidden;
             transition: opacity 1s ease-in, visibility 1s;
             z-index: 1;
-            overflow: hidden; 
+            
+            /* === ĐÃ XÓA "overflow: hidden;" GÂY LỖI === */
+            
             background-image: radial-gradient(white 0.5px, transparent 0.5px);
             background-size: 150px 150px;
         }
@@ -103,39 +105,32 @@
             100% { transform: scale(0); opacity: 0; }
         }
 
-        /* === ĐÂY LÀ PHẦN SỬA LỖI VỊ TRÍ === */
-        
-        /* 1. Lớp Bọc Wrapper (Chỉ để căn giữa 2D) */
+        /* 2. Hiệu ứng chữ "BÊN DƯỚI" */
         .vortex-wrapper {
             position: absolute;
             bottom: 2%; 
             left: 50%; 
-            /* Căn giữa 2D */
             transform: translateX(-50%); 
             width: 100%;
             height: 500px; 
             opacity: 0;
-            animation: fadeInText 2s ease-out 1.0s forwards; 
+            
+            /* === SỬA DELAY CHO CHỮ HIỆN CÙNG LÚC VỚI TIM === */
+            animation: fadeInText 2s ease-out 0.5s forwards; 
         }
-
-        /* 2. Lớp Container (Chỉ để làm 3D) */
         .vortex-container {
             position: relative;
             width: 100%;
             height: 100%;
-            /* Chỉ 3D */
             perspective: 800px; 
             transform-style: preserve-3d;
         }
-
         @keyframes fadeInText {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-
         .text-ring-vortex {
             position: absolute;
-            /* Phải thêm 3 dòng này để nó căn giữa */
             top: 50%;
             left: 50%;
             transform-style: preserve-3d;
@@ -149,7 +144,6 @@
         #ring3 {
             animation-duration: 50s;
         }
-
         .letter-span { 
             position: absolute;
             top: 50%;
@@ -178,8 +172,6 @@
             from { transform: rotateX(80deg) rotateY(0deg); }
             to { transform: rotateX(80deg) rotateY(360deg); }
         }
-        /* --- HẾT PHẦN SỬA LỖI --- */
-
 
         /* --- CSS CHO TIM RƠI (tiếp tục) --- */
         .heart {
@@ -208,7 +200,6 @@
 
     <div class="post-open-effects">
         <div class="particle-heart"></div>
-        
         <div class="vortex-wrapper">
             <div class="vortex-container">
                 <div class="text-ring-vortex" id="ring1"></div>
@@ -216,7 +207,7 @@
                 <div class="text-ring-vortex" id="ring3"></div>
             </div>
         </div>
-        </div>
+    </div>
 
     <script>
         const envelopeWrapper = document.querySelector('.envelope-wrapper');
