@@ -56,19 +56,30 @@
         h1 { font-size: 1.5em; color: #d9534f; margin-top: 0; }
         p { font-size: 1em; color: #333; }
 
-        /* --- CSS CHO HIỆU ỨNG MỚI --- */
+        /* --- CSS CHO HIỆU ỨNG MỚI (ĐÃ ĐỔI NỀN) --- */
         .post-open-effects {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: black; 
+            /* === SỬA NỀN ĐEN THÀNH NỀN HỒNG PHÁO HOA === */
+            background: linear-gradient(120deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            /* Background pháo hoa lấp lánh */
+            background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%),
+                              radial-gradient(circle at 70% 80%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%),
+                              radial-gradient(circle at 40% 50%, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 40%);
+            background-size: 200px 200px, 150px 150px, 100px 100px;
+            animation: animateBackground 20s linear infinite; /* Animation cho nền lung linh */
+
             opacity: 0; visibility: hidden;
             transition: opacity 1s ease-in, visibility 1s;
             z-index: 1;
-            background-image: radial-gradient(white 0.5px, transparent 0.5px);
-            background-size: 150px 150px;
             overflow: hidden; 
         }
+        @keyframes animateBackground {
+            0% { background-position: 0% 0%, 0% 0%, 0% 0%; }
+            100% { background-position: 500% 500%, 500% 500%, 500% 500%; }
+        }
+
         body.show-effects .post-open-effects {
             opacity: 1; visibility: visible; z-index: 6; 
         }
@@ -83,7 +94,6 @@
             animation: fadeInHeart 2s ease-out 0s forwards;
             opacity: 0;
         }
-        /* Animation CHỈ DÀNH CHO TRÁI TIM */
         @keyframes fadeInHeart {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
             100% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
@@ -104,49 +114,40 @@
             100% { transform: scale(0); opacity: 0; }
         }
 
-        /* === 2. CSS CHO CHỮ ĐỨNG YÊN (ĐÃ SỬA LỖI) === */
+        /* === 2. CSS CHO CHỮ ĐỨNG YÊN === */
         .static-text-container {
             position: absolute;
-            top: 60%; /* Đẩy xuống dưới trái tim */
+            top: 60%; 
             left: 50%;
             transform: translateX(-50%);
-            width: 90%; /* Chiếm 90% chiều ngang */
+            width: 90%; 
             text-align: center;
             opacity: 0;
-            
-            /* === SỬA LỖI: Dùng animation MỚI TÊN LÀ "fadeInText" === */
-            animation: fadeInText 2s ease-out 0.5s forwards; /* Hiện sau tim 0.5s */
+            animation: fadeInText 2s ease-out 0.5s forwards; 
         }
-        
-        /* === SỬA LỖI: Tạo keyframe mới CHỈ DÀNH CHO TEXT === */
         @keyframes fadeInText {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
         
-        /* CSS cho 3 dòng chữ */
         .static-text-container p {
-            color: white;
+            color: white; /* Giữ màu chữ trắng để nổi bật trên nền hồng */
             font-weight: bold;
-            margin: 10px 0; /* Khoảng cách giữa các dòng */
+            margin: 10px 0; 
             line-height: 1.3;
         }
         
         #line1 {
             font-size: 1.7em;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f; /* Hồng */
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f; 
         }
         #line2 {
             font-size: 1.3em;
-            text-shadow: 0 0 5px #fff, 0 0 10px #00ffff, 0 0 20px #00ffff; /* Xanh lơ */
+            text-shadow: 0 0 5px #fff, 0 0 10px #00ffff, 0 0 20px #00ffff; 
         }
         #line3 {
             font-size: 1.5em;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ffff00, 0 0 20px #ffff00; /* Vàng */
+            text-shadow: 0 0 5px #fff, 0 0 10px #ffff00, 0 0 20px #ffff00; 
         }
         /* === KẾT THÚC CSS CHỮ ĐỨNG YÊN === */
 
