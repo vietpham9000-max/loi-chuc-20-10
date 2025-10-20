@@ -69,12 +69,9 @@
             background-image: radial-gradient(white 0.5px, transparent 0.5px);
             background-size: 150px 150px;
         }
-
         body.show-effects .post-open-effects {
             opacity: 1; visibility: visible; z-index: 6; 
         }
-
-        /* === ĐÃ XÓA CSS CHO .top-text === */
 
         /* 1. Hiệu ứng tim "NHỘN NHỊP" */
         .particle-heart {
@@ -86,12 +83,10 @@
             animation: fadeInHeart 2s ease-out 0.5s forwards;
             opacity: 0;
         }
-
         @keyframes fadeInHeart {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
             100% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
         }
-
         .particle {
             position: absolute;
             background: #ff007f; 
@@ -119,7 +114,7 @@
             perspective: 800px; 
             transform-style: preserve-3d;
             opacity: 0;
-            animation: fadeInText 2s ease-out 1.0s forwards; 
+            animation: fadeInText 2s ease-out 1.1s forwards; /* Thay đổi nhỏ 1.1s */
         }
         
         @keyframes fadeInText {
@@ -147,7 +142,6 @@
             left: 50%;
             color: white;
             font-weight: bold;
-            text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f;
             transform-origin: 50% 50%;
             backface-visibility: hidden;
         }
@@ -156,11 +150,15 @@
             font-size: 1.5em; 
             text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f;
         }
+        
+        /* === ĐÃ ĐỔI MÀU VÒNG CHỮ SỐ 2 === */
         #ring2 .letter-span {
             font-size: 1.2em;
             opacity: 0.9;
-            text-shadow: 0 0 5px #fff, 0 0 10px #00ffff;
+            /* ĐỔI TỪ XANH LƠ SANG XANH LÁ CÂY */
+            text-shadow: 0 0 5px #fff, 0 0 10px #00ff00, 0 0 20px #00ff00;
         }
+        
         #ring3 .letter-span {
             font-size: 1.0em;
             opacity: 0.8;
@@ -198,7 +196,6 @@
     </div>
 
     <div class="post-open-effects">
-        
         <div class="particle-heart"></div>
         <div class="vortex-container">
             <div class="text-ring-vortex" id="ring1"></div>
