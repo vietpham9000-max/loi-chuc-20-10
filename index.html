@@ -65,7 +65,6 @@
             opacity: 0; visibility: hidden;
             transition: opacity 1s ease-in, visibility 1s;
             z-index: 1;
-            /* Đã xóa overflow: hidden từ lần trước */
             background-image: radial-gradient(white 0.5px, transparent 0.5px);
             background-size: 150px 150px;
         }
@@ -80,7 +79,8 @@
             left: 50%; 
             width: 300px; height: 300px;
             transform: translate(-50%, -50%) scale(1.3);
-            animation: fadeInHeart 2s ease-out 0.5s forwards;
+            /* === SỬA LỖI TIMING: ĐỔI 0.5s -> 0s === */
+            animation: fadeInHeart 2s ease-out 0s forwards;
             opacity: 0;
         }
         @keyframes fadeInHeart {
@@ -103,7 +103,7 @@
             100% { transform: scale(0); opacity: 0; }
         }
 
-        /* 2. Hiệu ứng chữ "BÊN DƯỚI" (Đã sửa lỗi) */
+        /* 2. Hiệu ứng chữ "BÊN DƯỚI" */
         .vortex-wrapper {
             position: absolute;
             bottom: 2%; 
@@ -113,9 +113,8 @@
             height: 500px; 
             opacity: 0;
             
-            /* === ĐÂY LÀ PHẦN SỬA LỖI TIMING === */
-            /* Đổi từ 1.0s -> 0.5s để hiện cùng lúc với tim */
-            animation: fadeInText 2s ease-out 0.5s forwards; 
+            /* === SỬA LỖI TIMING: ĐỔI 0.5s -> 0s === */
+            animation: fadeInText 2s ease-out 0s forwards; 
         }
         .vortex-container {
             position: relative;
@@ -161,13 +160,11 @@
         #ring2 .letter-span { /* Câu 2: Vòng giữa */
             font-size: 1.2em;
             opacity: 0.9;
-            /* Đổi sang màu Xanh lơ (Cyan) cho đẹp */
             text-shadow: 0 0 5px #fff, 0 0 10px #00ffff, 0 0 20px #00ffff;
         }
         #ring3 .letter-span { /* Câu 3: Vòng trong */
             font-size: 1.0em;
             opacity: 0.8;
-            /* Đổi sang màu Vàng (Yellow) */
             text-shadow: 0 0 5px #fff, 0 0 10px #ffff00, 0 0 20px #ffff00;
         }
         @keyframes spin {
@@ -193,7 +190,8 @@
 
     <div class="envelope-wrapper" onclick="openLetter()">
         <div class="letter">
-            <h1>Tặng Bé Thùy!</h1> <p>Nhấn vào đây để xem điều bất ngờ nhé!</p>
+            <h1>Tặng Bé Thùy!</h1>
+            <p>Nhấn vào đây để xem điều bất ngờ nhé!</p>
         </div>
         <div class="envelope-flap"></div>
         <div class="envelope-body"></div>
@@ -255,10 +253,9 @@
             const text2 = "Chúc Bé Yêu Của Anh Luôn Xinh Đẹp, Đáng Yêu ✨ ";
             const text3 = "Mãi Yêu Em 💖 ";
 
-            // Tăng bán kính vòng 2 và 3 để dễ đọc hơn
-            generateRing(ring1, text1.repeat(2), 450); // Vòng ngoài
-            generateRing(ring2, text2.repeat(2), 350); // Vòng giữa (Lặp 2 lần cho chữ dài)
-            generateRing(ring3, text3.repeat(5), 250); // Vòng trong
+            generateRing(ring1, text1.repeat(2), 450); 
+            generateRing(ring2, text2.repeat(2), 350); 
+            generateRing(ring3, text3.repeat(5), 250); 
         }
 
         function generateRing(container, text, radius) {
