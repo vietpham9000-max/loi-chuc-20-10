@@ -27,87 +27,83 @@
             z-index: 5;
         }
         .letter {
-            position: absolute;
-            background: #fff;
-            width: 280px; height: 180px;
-            border-radius: 10px;
+            position: absolute; background: #fff;
+            width: 280px; height: 180px; border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            box-sizing: border-box;
-            z-index: 1;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.7s 0.2s ease-out;
-            text-align: center;
+            padding: 20px; box-sizing: border-box; z-index: 1;
+            transform: translateY(100px); opacity: 0;
+            transition: all 0.7s 0.2s ease-out; text-align: center;
         }
         .envelope-flap {
             width: 0; height: 0;
             border-bottom: 75px solid #f08080;
             border-left: 170px solid transparent;
             border-right: 170px solid transparent;
-            position: relative;
-            z-index: 3;
-            transform-origin: top;
-            transition: all 0.5s ease-out;
+            position: relative; z-index: 3;
+            transform-origin: top; transition: all 0.5s ease-out;
         }
         .envelope-body {
-            width: 340px; height: 150px;
-            background: #fa8072;
-            position: relative;
-            border-radius: 0 0 10px 10px;
-            z-index: 2;
+            width: 340px; height: 150px; background: #fa8072;
+            position: relative; border-radius: 0 0 10px 10px; z-index: 2;
         }
         .envelope-wrapper.open .letter { transform: translateY(-50px); opacity: 1; }
         .envelope-wrapper.open .envelope-flap { transform: rotateX(180deg); }
         .envelope-wrapper.open .envelope-body,
         .envelope-wrapper.open .envelope-flap {
-            opacity: 0;
-            transition: all 0.3s 0.5s ease-in;
+            opacity: 0; transition: all 0.3s 0.5s ease-in;
             transform: translateY(100px);
         }
         h1 { font-size: 1.5em; color: #d9534f; margin-top: 0; }
         p { font-size: 1em; color: #333; }
 
-        /* --- CSS CHO HIỆU ỨNG MỚI (ĐÃ SỬA LỖI) --- */
+        /* --- CSS CHO HIỆU ỨNG MỚI (Full) --- */
         .post-open-effects {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background-color: black; 
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0; visibility: hidden;
             transition: opacity 1s ease-in, visibility 1s;
             z-index: 1;
-            /* Đã xóa display:flex để tránh xung đột */
-            overflow: hidden; /* Giữ overflow ở đây */
+            overflow: hidden; 
+            
+            /* === THÊM SAO LẤP LÁNH === */
+            background-image: radial-gradient(white 0.5px, transparent 0.5px);
+            background-size: 150px 150px;
         }
 
         body.show-effects .post-open-effects {
-            opacity: 1;
-            visibility: visible;
-            z-index: 6; 
+            opacity: 1; visibility: visible; z-index: 6; 
         }
 
-        /* 1. Hiệu ứng tim hạt (particles) SỬA LẠI ĐỊNH VỊ */
-        .particle-heart {
-            /* === BẮT BUỘC DÙNG POSITION: ABSOLUTE === */
+        /* === THÊM CHỮ "MÓN QUÀ..." === */
+        .top-text {
             position: absolute;
-            top: 35%; /* Đẩy tim lên cao 35% từ trên xuống */
-            left: 50%; /* Căn giữa */
-            width: 300px;
-            height: 300px;
-            /* Dùng transform để căn giữa chính xác */
-            transform: translate(-50%, -50%) scale(1.2); 
+            top: 5%;
+            left: 5%;
+            color: white;
+            font-size: 1.2em;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 0 0 5px #ff007f;
+            opacity: 0;
+            animation: fadeInText 2s ease-out 2s forwards; /* Hiện sau cùng */
+            z-index: 100;
+        }
+
+        /* 1. Hiệu ứng tim "NHỘN NHỊP" */
+        .particle-heart {
+            position: absolute;
+            top: 35%; 
+            left: 50%; 
+            width: 300px; height: 300px;
+            transform: translate(-50%, -50%) scale(1.3); /* Phóng to hơn */
             animation: fadeInHeart 2s ease-out 0.5s forwards;
             opacity: 0;
         }
 
         @keyframes fadeInHeart {
-            /* Cập nhật keyframe cho transform mới */
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
         }
 
         .particle {
@@ -115,8 +111,10 @@
             background: #ff007f; 
             border-radius: 50%;
             opacity: 0;
-            box-shadow: 0 0 5px #ff007f, 0 0 10px #ff007f;
-            animation: particleAnimation 2.5s infinite ease-out;
+            /* Thêm hiệu ứng "mềm" (blur) và "rực rỡ" (shadow) */
+            box-shadow: 0 0 8px #ff007f, 0 0 15px #ff007f;
+            filter: blur(1px);
+            animation: particleAnimation 3s infinite ease-out;
         }
         @keyframes particleAnimation {
             0% { transform: scale(0); opacity: 0; }
@@ -125,20 +123,18 @@
             100% { transform: scale(0); opacity: 0; }
         }
 
-        /* 2. Hiệu ứng chữ quay vòng (Vortex) SỬA LẠI ĐỊNH VỊ */
+        /* 2. Hiệu ứng chữ "BÊN DƯỚI" (Đã sửa lỗi) */
         .vortex-container {
             position: absolute;
-            bottom: 5%; /* Nằm ở dưới đáy */
-            left: 50%; /* Căn giữa */
-            transform: translateX(-50%); /* Căn giữa chính xác */
+            bottom: 2%; /* Đẩy xuống thấp hơn */
+            left: 50%; 
+            transform: translateX(-50%); 
             width: 100%;
             height: 500px; 
-            perspective: 500px;
-            /* === ĐÃ XÓA "overflow: hidden" Ở ĐÂY === */
+            /* Thay đổi góc nhìn cho giống video */
+            perspective: 800px; 
             transform-style: preserve-3d;
             opacity: 0;
-            
-            /* Sửa delay: cho chữ hiện sau tim 0.5s */
             animation: fadeInText 2s ease-out 1.0s forwards; 
         }
         
@@ -150,7 +146,8 @@
         .text-ring-vortex {
             position: absolute;
             transform-style: preserve-3d;
-            transform: rotateX(75deg); 
+            /* Nghiêng nhiều hơn để "dẹt" xuống */
+            transform: rotateX(80deg); 
             animation: spin 30s linear infinite;
         }
         #ring2 {
@@ -163,29 +160,35 @@
 
         .letter-span { 
             position: absolute;
-            top: 0;
-            left: 50%; 
+            top: 50%;
+            left: 50%;
             color: white;
-            font-size: 1.5em; 
             font-weight: bold;
             text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f;
-            transform-origin: 0 0; 
+            transform-origin: 50% 50%;
             backface-visibility: hidden;
+            /* JS sẽ thêm transform ở đây */
         }
-        #ring2 .letter-span {
-            font-size: 1.3em;
-            opacity: 0.8;
+        
+        /* === CSS cho các vòng chữ bên trong === */
+        #ring1 .letter-span { /* Vòng ngoài (lời chúc chính) */
+            font-size: 1.5em; 
+            text-shadow: 0 0 5px #fff, 0 0 10px #ff007f, 0 0 20px #ff007f;
+        }
+        #ring2 .letter-span { /* Vòng giữa */
+            font-size: 1.2em;
+            opacity: 0.9;
             text-shadow: 0 0 5px #fff, 0 0 10px #00ffff;
         }
-        #ring3 .letter-span {
-            font-size: 1.1em;
-            opacity: 0.6;
+        #ring3 .letter-span { /* Vòng trong */
+            font-size: 1.0em;
+            opacity: 0.8;
             text-shadow: 0 0 5px #fff, 0 0 10px #ffff00;
         }
 
         @keyframes spin {
-            from { transform: rotateX(75deg) rotateY(0deg); }
-            to { transform: rotateX(75deg) rotateY(360deg); }
+            from { transform: rotateX(80deg) rotateY(0deg); }
+            to { transform: rotateX(80deg) rotateY(360deg); }
         }
 
         /* --- CSS CHO TIM RƠI (tiếp tục) --- */
@@ -214,6 +217,7 @@
     </div>
 
     <div class="post-open-effects">
+        <div class="top-text">Món quà 20/10 dành cho vợ anh 💖</div>
         <div class="particle-heart"></div>
         <div class="vortex-container">
             <div class="text-ring-vortex" id="ring1"></div>
@@ -229,7 +233,6 @@
 
         function openLetter() {
             envelopeWrapper.classList.add('open');
-            
             setTimeout(() => {
                 body.classList.add('show-effects');
                 createHeartParticles();
@@ -238,9 +241,9 @@
             }, 1500); 
         }
 
-        // --- JavaScript cho Tim hạt (Particles) ---
+        // --- JavaScript cho Tim "NHỘN NHỊP" ---
         function createHeartParticles() {
-            const numParticles = 1500; // Giữ nguyên 1500 hạt
+            const numParticles = 2500; // Tăng lên 2500 hạt
             for (let i = 0; i < numParticles; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -250,26 +253,28 @@
                 let y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
                 particle.style.left = (x * r * 2.5 + 50) + '%';
                 particle.style.top = (-y * r * 2.5 + 50) + '%';
-                particle.style.width = particle.style.height = (Math.random() * 6 + 4) + 'px'; 
-                particle.style.animationDelay = (Math.random() * 1.5) + 's';
-                particle.style.animationDuration = (Math.random() * 1.5 + 1) + 's'; 
+                particle.style.width = particle.style.height = (Math.random() * 5 + 3) + 'px'; 
+                particle.style.animationDelay = (Math.random() * 2) + 's';
+                particle.style.animationDuration = (Math.random() * 2 + 1.5) + 's'; 
                 particleHeart.appendChild(particle);
             }
         }
 
-        // --- JavaScript cho Hiệu ứng chữ quay vòng ---
+        // --- JavaScript cho Hiệu ứng chữ (Full) ---
         function createTextRings() {
             const ring1 = document.getElementById('ring1');
             const ring2 = document.getElementById('ring2');
             const ring3 = document.getElementById('ring3');
             
+            /* === NỘI DUNG CHỮ MỚI GIỐNG VIDEO === */
             const text1 = "Chúc mừng Bé Thùy ngày 20/10 ❤️ ";
-            const text2 = "Chúc mừng Bé Thùy ngày 20/10 ✨ ";
-            const text3 = "Chúc mừng Bé Thùy ngày 20/10 🎉 ";
+            const text2 = "💖 Yêu em ✨ Hạnh phúc 💖 520 ";
+            const text3 = "🎉 20/10 ✨ Vui vẻ 💖 ";
 
-            generateRing(ring1, text1.repeat(2), 250); 
-            generateRing(ring2, text2.repeat(2), 350); 
-            generateRing(ring3, text3.repeat(2), 450); 
+            // Thay đổi bán kính cho giống video
+            generateRing(ring1, text1.repeat(2), 450); // Vòng ngoài, 450px
+            generateRing(ring2, text2.repeat(4), 300); // Vòng giữa, 300px
+            generateRing(ring3, text3.repeat(5), 150); // Vòng trong, 150px
         }
 
         function generateRing(container, text, radius) {
@@ -279,7 +284,9 @@
                 const span = document.createElement('span');
                 span.className = 'letter-span';
                 span.innerText = letter;
-                span.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px)`;
+                /* === SỬA LỖI ĐỊNH VỊ CHỮ CÁI === */
+                // Vừa xoay + đẩy ra, vừa căn giữa chữ cái
+                span.style.transform = `rotateY(${i * angleStep}deg) translateZ(${radius}px) translateX(-50%) translateY(-50%)`;
                 container.appendChild(span);
             });
         }
